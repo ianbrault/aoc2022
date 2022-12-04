@@ -29,6 +29,7 @@ pub fn split_lines_double<'a>(input: &'a str) -> impl Iterator<Item = Split<'a, 
     input.split("\n\n").map(|chunk| chunk.split('\n'))
 }
 
+/*
 /// splits a string by newlines, and parses a type out of the strings
 pub fn split_and_parse_lines<'a, T>(input: &'a str) -> impl Iterator<Item = T> + 'a
 where
@@ -37,6 +38,7 @@ where
 {
     input.split('\n').map(|s| s.parse::<T>().unwrap())
 }
+*/
 
 /// splits a string by chunks of newlines, separated by double newlines, and
 /// parses a type out of the strings
@@ -48,4 +50,9 @@ where
     split_lines_double(input)
         .map(|chunk| chunk.map(|s| s.parse::<T>().unwrap()).collect::<Vec<_>>())
         .collect::<Vec<_>>()
+}
+
+/// grabs the n-th character from the given string
+pub fn nchar(s: &str, n: usize) -> char {
+    s.chars().nth(n).unwrap()
 }
