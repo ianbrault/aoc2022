@@ -12,6 +12,18 @@ pub enum Answer {
     UInt(u64),
 }
 
+impl From<i64> for Answer {
+    fn from(n: i64) -> Self {
+        Self::Int(n)
+    }
+}
+
+impl From<u64> for Answer {
+    fn from(n: u64) -> Self {
+        Self::UInt(n)
+    }
+}
+
 impl fmt::Display for Answer {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
@@ -25,6 +37,29 @@ impl fmt::Display for Answer {
 pub struct Solution {
     pub part_1: Option<Answer>,
     pub part_2: Option<Answer>,
+}
+
+impl Solution {
+    pub fn new() -> Self {
+        Self {
+            part_1: None,
+            part_2: None,
+        }
+    }
+
+    pub fn set_part_1<T>(&mut self, answer: T)
+    where
+        T: Into<Answer>,
+    {
+        self.part_1 = Some(answer.into());
+    }
+
+    pub fn set_part_2<T>(&mut self, answer: T)
+    where
+        T: Into<Answer>,
+    {
+        self.part_2 = Some(answer.into());
+    }
 }
 
 /// standard puzzle function type

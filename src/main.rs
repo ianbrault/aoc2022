@@ -68,12 +68,16 @@ fn run_puzzle(day: usize) -> Result<()> {
     // derive the puzzle solution
     info!("Day {}", day);
     // TODO: add benchmarking code
-    let solution = puzzles::DAYS[day](input)?;
+    let solution = puzzles::DAYS[day - 1](input)?;
     if let Some(answer) = solution.part_1 {
         info!("part 1: {}", answer);
+    } else {
+        info!("part 1: no answer");
     }
     if let Some(answer) = solution.part_2 {
         info!("part 2: {}", answer);
+    } else {
+        info!("part 2: no answer");
     }
     Ok(())
 }
