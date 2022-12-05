@@ -1,5 +1,6 @@
 /*
 ** src/puzzles/day_2.rs
+** https://adventofcode.com/2022/day/2
 */
 
 use crate::types::Solution;

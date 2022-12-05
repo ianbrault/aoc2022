@@ -4,9 +4,10 @@
 
 mod day_1;
 mod day_2;
+mod day_3;
 
 use crate::types::Puzzle;
 
-pub const N_DAYS: usize = 2;
+pub const N_DAYS: usize = 3;
 
-pub const DAYS: [Puzzle; N_DAYS] = [day_1::run, day_2::run];
+pub const DAYS: [Puzzle; N_DAYS] = [day_1::run, day_2::run, day_3::run];

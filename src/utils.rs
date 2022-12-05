@@ -56,3 +56,40 @@ where
 pub fn nchar(s: &str, n: usize) -> char {
     s.chars().nth(n).unwrap()
 }
+
+/// iterator adapter to group an iterator into 3-tuples
+pub struct GroupBy3Iterator<I> {
+    iter: I,
+}
+
+impl<I> GroupBy3Iterator<I> {
+    pub fn new(iter: I) -> Self {
+        Self { iter }
+    }
+}
+
+impl<'a, I, T> Iterator for GroupBy3Iterator<I>
+where
+    T: 'a,
+    I: Iterator<Item = &'a T>,
+{
+    type Item = (&'a T, &'a T, &'a T);
+    fn next(&mut self) -> Option<Self::Item> {
+        let x = self.iter.next();
+        let y = self.iter.next();
+        let z = self.iter.next();
+        if let (Some(a), Some(b), Some(c)) = (x, y, z) {
+            Some((a, b, c))
+        } else {
+            None
+        }
+    }
+}
+
+pub trait GroupBy3<T>: Iterator<Item = T> + Sized {
+    fn group_by_3(self) -> GroupBy3Iterator<Self> {
+        GroupBy3Iterator::new(self)
+    }
+}
+
+impl<T, I: Iterator<Item = T>> GroupBy3<T> for I {}
