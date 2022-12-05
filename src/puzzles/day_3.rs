@@ -35,8 +35,8 @@ impl Rucksack {
     }
 }
 
-impl<'a> From<&'a str> for Rucksack {
-    fn from(s: &'a str) -> Self {
+impl From<&str> for Rucksack {
+    fn from(s: &str) -> Self {
         let length = s.len();
         let half = length / 2;
         let compartment_a_str = &s[0..half];
