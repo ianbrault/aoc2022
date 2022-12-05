@@ -10,6 +10,7 @@ use std::fmt;
 pub enum Answer {
     Int(i64),
     UInt(u64),
+    Str(String),
 }
 
 impl From<i64> for Answer {
@@ -30,11 +31,18 @@ impl From<usize> for Answer {
     }
 }
 
+impl From<String> for Answer {
+    fn from(n: String) -> Self {
+        Self::Str(n)
+    }
+}
+
 impl fmt::Display for Answer {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
             Self::Int(x) => write!(f, "{}", x),
             Self::UInt(x) => write!(f, "{}", x),
+            Self::Str(x) => write!(f, "{}", x),
         }
     }
 }
