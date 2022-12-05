@@ -129,11 +129,11 @@ pub fn run(input: String) -> Result<Solution> {
     let mut solution = Solution::new();
     // parse into games with the second column being the player's move
     let games_with_move = utils::split_lines(&input)
-        .map(|s| Game::from_str_with_move(s))
+        .map(Game::from_str_with_move)
         .collect::<Vec<_>>();
     // parse into games with the second column being the result
     let games_with_result = utils::split_lines(&input)
-        .map(|s| Game::from_str_with_result(s))
+        .map(Game::from_str_with_result)
         .collect::<Vec<_>>();
 
     // part 1: What would your total score be if everything goes exactly

@@ -20,12 +20,12 @@ pub fn read_file(path: &Path) -> Result<String> {
 }
 
 /// splits a string by newlines
-pub fn split_lines<'a>(input: &'a str) -> impl Iterator<Item = &'a str> {
+pub fn split_lines(input: &str) -> impl Iterator<Item = &str> {
     input.split('\n')
 }
 
 /// splits a string by chunks of newlines, separated by double newlines
-pub fn split_lines_double<'a>(input: &'a str) -> impl Iterator<Item = Split<'a, char>> {
+pub fn split_lines_double(input: &str) -> impl Iterator<Item = Split<'_, char>> {
     input.split("\n\n").map(|chunk| chunk.split('\n'))
 }
 
@@ -42,7 +42,7 @@ where
 
 /// splits a string by chunks of newlines, separated by double newlines, and
 /// parses a type out of the strings
-pub fn split_and_parse_lines_double<'a, T>(input: &'a str) -> Vec<Vec<T>>
+pub fn split_and_parse_lines_double<T>(input: &str) -> Vec<Vec<T>>
 where
     T: FromStr,
     <T as FromStr>::Err: std::fmt::Debug,

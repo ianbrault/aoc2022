@@ -75,7 +75,7 @@ pub fn run(input: String) -> Result<Solution> {
     let priority_sum = rucksacks
         .iter()
         .map(|rucksack| rucksack.common_char())
-        .map(|ch| priority(ch))
+        .map(priority)
         .sum::<u64>();
     solution.set_part_1(priority_sum);
 
@@ -85,7 +85,7 @@ pub fn run(input: String) -> Result<Solution> {
     let group_priority_sum = elf_groups
         .iter()
         .map(|(a, b, c)| Rucksack::common_char_in_group(a, b, c))
-        .map(|ch| priority(ch))
+        .map(priority)
         .sum::<u64>();
     solution.set_part_2(group_priority_sum);
 

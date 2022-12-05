@@ -13,7 +13,7 @@ use log::{debug, info};
 use std::env;
 use std::path::Path;
 
-const PROJECT_DIR: &'static str = env!("CARGO_MANIFEST_DIR");
+const PROJECT_DIR: &str = env!("CARGO_MANIFEST_DIR");
 
 #[derive(Parser)]
 struct Args {

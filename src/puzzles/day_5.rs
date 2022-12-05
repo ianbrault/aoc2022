@@ -68,16 +68,19 @@ impl From<&str> for Stacks {
 
         for line in lines[0..(lines.len() - 1)].iter().rev() {
             let n_cols = (line.len() + 1) / 4;
-            for col in 0..n_cols {
+            for (col, stack) in stacks.iter_mut().enumerate().take(n_cols) {
                 let i = col * 4 + 1;
                 let crate_name = line[i..(i + 1)].chars().next().unwrap();
                 if crate_name != ' ' {
-                    stacks[col].push(crate_name);
+                    stack.push(crate_name);
                 }
             }
         }
 
-        Self { stacks, buffer: Vec::new() }
+        Self {
+            stacks,
+            buffer: Vec::new(),
+        }
     }
 }
 
@@ -87,9 +90,11 @@ pub fn run(input: String) -> Result<Solution> {
     let (mut stacks_1, moves) = match input.split("\n\n").collect::<Vec<_>>().as_slice() {
         &[stacks_str, moves_str] => {
             let stacks = Stacks::from(stacks_str);
-            let moves = utils::split_lines(moves_str).map(Move::from).collect::<Vec<_>>();
+            let moves = utils::split_lines(moves_str)
+                .map(Move::from)
+                .collect::<Vec<_>>();
             (stacks, moves)
-        },
+        }
         _ => unreachable!(),
     };
     // clone for part 2
@@ -113,4 +118,3 @@ pub fn run(input: String) -> Result<Solution> {
 
     Ok(solution)
 }
-
