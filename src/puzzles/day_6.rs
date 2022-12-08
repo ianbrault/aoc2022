@@ -63,7 +63,7 @@ pub fn run(input: String) -> Result<Solution> {
     // start-of-packet marker is detected?
 
     // initialize with the first characters
-    for c in &stream[0..PACKET_MARKER_SIZE] {
+    for c in &stream[..PACKET_MARKER_SIZE] {
         packet_char_counter.add(*c);
     }
     // then use a sliding window to find the start-of-packet marker
@@ -89,7 +89,7 @@ pub fn run(input: String) -> Result<Solution> {
     // start-of-message marker is detected?
 
     // initialize with the first characters
-    for c in &stream[0..MESSAGE_MARKER_SIZE] {
+    for c in &stream[..MESSAGE_MARKER_SIZE] {
         message_char_counter.add(*c);
     }
     // then use a sliding window to find the start-of-packet marker

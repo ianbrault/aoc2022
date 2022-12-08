@@ -39,7 +39,7 @@ impl From<&str> for Rucksack {
     fn from(s: &str) -> Self {
         let length = s.len();
         let half = length / 2;
-        let compartment_a_str = &s[0..half];
+        let compartment_a_str = &s[..half];
         let compartment_b_str = &s[half..length];
         let compartment_a = compartment_a_str.chars().collect();
         let compartment_b = compartment_b_str.chars().collect();

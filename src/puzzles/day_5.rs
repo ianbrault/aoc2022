@@ -66,7 +66,7 @@ impl From<&str> for Stacks {
         let mut stacks: [Vec<char>; N_STACKS] = Default::default();
         let lines = utils::split_lines(s).collect::<Vec<_>>();
 
-        for line in lines[0..(lines.len() - 1)].iter().rev() {
+        for line in lines[..(lines.len() - 1)].iter().rev() {
             let n_cols = (line.len() + 1) / 4;
             for (col, stack) in stacks.iter_mut().enumerate().take(n_cols) {
                 let i = col * 4 + 1;

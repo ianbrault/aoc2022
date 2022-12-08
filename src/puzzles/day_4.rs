@@ -18,7 +18,7 @@ struct AssignmentPair {
 impl AssignmentPair {
     fn parse_pair(s: &str) -> Pair {
         let split = s.find('-').unwrap();
-        let a = &s[0..split].parse().unwrap();
+        let a = &s[..split].parse().unwrap();
         let b = &s[(split + 1)..s.len()].parse().unwrap();
         (*a, *b)
     }
@@ -40,7 +40,7 @@ impl AssignmentPair {
 impl From<&str> for AssignmentPair {
     fn from(s: &str) -> Self {
         let split = s.find(',').unwrap();
-        let a = Self::parse_pair(&s[0..split]);
+        let a = Self::parse_pair(&s[..split]);
         let b = Self::parse_pair(&s[(split + 1)..s.len()]);
         // set the smaller pair as x and the larger as y
         if a.1 - a.0 < b.1 - b.0 {
