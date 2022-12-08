@@ -4,6 +4,7 @@
 
 use anyhow::Result;
 
+use std::error;
 use std::fmt;
 
 /// sum type for all possible puzzle answers
@@ -78,3 +79,25 @@ impl Solution {
 
 /// standard puzzle function type
 pub type Puzzle = fn(String) -> Result<Solution>;
+
+/// custom error type
+#[derive(Debug)]
+pub enum Error {
+    NoSolution,
+}
+
+impl fmt::Display for Error {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self {
+            Self::NoSolution => write!(f, "no solution found"),
+        }
+    }
+}
+
+impl error::Error for Error {
+    fn description(&self) -> &str {
+        match self {
+            Self::NoSolution => "no solution found",
+        }
+    }
+}
