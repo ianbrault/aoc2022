@@ -9,3 +9,6 @@ chrono = "0.4"
 clap = { version = "4.0.29", features = ["derive"] }
 log = "0.4"
 fern = "0.6"
+
+[features]
+sample = []
