@@ -120,7 +120,7 @@ pub fn run(input: String) -> Result<Solution> {
 
     // part 2: Render the image given by your program. What eight capital
     // letters appear on your CRT?
-    let image = "\n".to_owned() + &cpu.image[..cpu.image.len() - 1];
+    let image = "\n".to_owned() + &cpu.image[..cpu.image.len() - 2];
     solution.set_part_2(image);
 
     Ok(solution)

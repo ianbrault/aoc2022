@@ -10,8 +10,10 @@ use anyhow::Result;
 use clap::Parser;
 use log::{debug, info, warn};
 
+use std::collections::HashMap;
 use std::env;
 use std::path::Path;
+use std::time::Instant;
 
 const PROJECT_DIR: &str = env!("CARGO_MANIFEST_DIR");
 #[cfg(feature = "sample")]
@@ -75,17 +77,18 @@ fn load_input(day: usize) -> Result<String> {
     }
 }
 
-fn run_puzzle(day: usize) -> Result<()> {
+/// runs the puzzle and returns the time elapsed as milliseconds
+fn run_puzzle(day: usize) -> Result<f64> {
     // load the puzzle input
     let input = load_input(day)?;
     // skip if the sample input is requested but not present
     if cfg!(feature = "sample") && input.is_empty() {
-        return Ok(());
+        return Ok(0.0);
     }
-    // derive the puzzle solution
     info!("Day {}", day);
-    // TODO: add benchmarking code
+    let tstart = Instant::now();
     let solution = puzzles::DAYS[day - 1](input)?;
+    let duration = tstart.elapsed();
     if let Some(answer) = solution.part_1 {
         info!("part 1: {}", answer);
     } else {
@@ -96,7 +99,7 @@ fn run_puzzle(day: usize) -> Result<()> {
     } else {
         info!("part 2: no answer");
     }
-    Ok(())
+    Ok(duration.as_secs_f64())
 }
 
 fn main() -> Result<()> {
@@ -109,13 +112,29 @@ fn main() -> Result<()> {
     }
     info!("Advent of Code 2022");
 
+    // track the time elapsed for each puzzle
+    let mut times = HashMap::new();
+
     if let Some(day) = args.day {
         // run a single puzzle if provided
-        run_puzzle(day)?;
+        let t = run_puzzle(day)?;
+        times.insert(day, t);
     } else {
         // otherwise run all puzzles
         for day in 1..=puzzles::N_DAYS {
-            run_puzzle(day)?;
+            let t = run_puzzle(day)?;
+            times.insert(day, t);
+        }
+    };
+
+    // log the puzzle times
+    // convert to ms for higher precision
+    if let Some(day) = args.day {
+        info!("day {}: {:.03}ms", day, times[&day] * 1000.0);
+    } else {
+        // otherwise run all puzzles
+        for day in 1..=puzzles::N_DAYS {
+            info!("day {}: {:.03}ms", day, times[&day] * 1000.0);
         }
     };
 
