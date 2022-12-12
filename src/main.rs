@@ -28,9 +28,9 @@ struct Args {
     /// Enable debug output
     #[arg(short, long)]
     debug: bool,
-    /// Run using the sample input
+    /// Time the runtime of each puzzle
     #[arg(short, long)]
-    test: bool,
+    time: bool,
 }
 
 /// initializes the fern logger
@@ -127,16 +127,18 @@ fn main() -> Result<()> {
         }
     };
 
-    // log the puzzle times
+    // log the puzzle times, if requested
     // convert to ms for higher precision
-    if let Some(day) = args.day {
-        info!("day {}: {:.03}ms", day, times[&day] * 1000.0);
-    } else {
-        // otherwise run all puzzles
-        for day in 1..=puzzles::N_DAYS {
+    if args.time {
+        if let Some(day) = args.day {
             info!("day {}: {:.03}ms", day, times[&day] * 1000.0);
-        }
-    };
+        } else {
+            // otherwise run all puzzles
+            for day in 1..=puzzles::N_DAYS {
+                info!("day {}: {:.03}ms", day, times[&day] * 1000.0);
+            }
+        };
+    }
 
     Ok(())
 }
