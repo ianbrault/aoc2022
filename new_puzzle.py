@@ -51,6 +51,7 @@ if __name__ == "__main__":
         sys.exit("error: missing argument DAY")
     except ValueError:
         sys.exit(f"error: invalid argument DAY")
+    add_sample = "-s" in sys.argv or "--sample" in sys.argv
 
     current_dir = os.path.dirname(os.path.abspath(__file__))
     puzzle_dir = os.path.join(current_dir, "src", "puzzles")
@@ -71,5 +72,8 @@ if __name__ == "__main__":
                 .replace("<M>", mods)
                 .replace("<P>", puzzles))
 
-    # touch the input file to prevent errors
+    # touch the input file
     pathlib.Path(os.path.join(input_dir, f"D{n}.txt")).touch()
+    # touch the sample input file, if requested
+    if add_sample:
+        pathlib.Path(os.path.join(input_dir, f"D{n}.dbg.txt")).touch()
