@@ -20,9 +20,21 @@ impl From<i64> for Answer {
     }
 }
 
+impl From<i32> for Answer {
+    fn from(n: i32) -> Self {
+        Self::Int(n as i64)
+    }
+}
+
 impl From<u64> for Answer {
     fn from(n: u64) -> Self {
         Self::UInt(n)
+    }
+}
+
+impl From<u32> for Answer {
+    fn from(n: u32) -> Self {
+        Self::UInt(n as u64)
     }
 }
 

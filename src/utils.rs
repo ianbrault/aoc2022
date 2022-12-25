@@ -29,17 +29,6 @@ pub fn split_lines_double(input: &str) -> impl Iterator<Item = Split<'_, char>> 
     input.split("\n\n").map(|chunk| chunk.split('\n'))
 }
 
-/*
-/// splits a string by newlines, and parses a type out of the strings
-pub fn split_and_parse_lines<'a, T>(input: &'a str) -> impl Iterator<Item = T> + 'a
-where
-    T: FromStr,
-    <T as FromStr>::Err: std::fmt::Debug,
-{
-    input.split('\n').map(|s| s.parse::<T>().unwrap())
-}
-*/
-
 /// splits a string by chunks of newlines, separated by double newlines, and
 /// parses a type out of the strings
 pub fn split_and_parse_lines_double<T>(input: &str) -> Vec<Vec<T>>
