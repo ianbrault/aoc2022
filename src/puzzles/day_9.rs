@@ -3,14 +3,13 @@
 ** https://adventofcode.com/2022/day/9
 */
 
-use crate::types::Solution;
+use crate::types::{Point, Solution};
 use crate::utils;
 
 use anyhow::Result;
 use log::debug;
 
 use std::collections::HashSet;
-use std::fmt;
 
 const N_KNOTS: usize = 10;
 
@@ -45,24 +44,6 @@ impl From<&str> for Motion {
         let direction = Direction::from(s.chars().next().unwrap());
         let length = s[2..].parse().unwrap();
         Self { direction, length }
-    }
-}
-
-#[derive(Clone, Copy, Eq, Hash, PartialEq)]
-struct Point {
-    x: i64,
-    y: i64,
-}
-
-impl Point {
-    fn origin() -> Self {
-        Self { x: 0, y: 0 }
-    }
-}
-
-impl fmt::Display for Point {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(f, "({},{})", self.x, self.y)
     }
 }
 

@@ -113,3 +113,25 @@ impl error::Error for Error {
         }
     }
 }
+
+#[derive(Clone, Copy, Debug, Eq, Hash, PartialEq)]
+pub struct Point {
+    pub x: i64,
+    pub y: i64,
+}
+
+impl Point {
+    pub fn new(x: i64, y: i64) -> Self {
+        Self { x, y }
+    }
+
+    pub fn origin() -> Self {
+        Self::new(0, 0)
+    }
+}
+
+impl fmt::Display for Point {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "({},{})", self.x, self.y)
+    }
+}
