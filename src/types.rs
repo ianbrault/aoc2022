@@ -128,6 +128,12 @@ impl Point {
     pub fn origin() -> Self {
         Self::new(0, 0)
     }
+
+    pub fn manhattan_distance(point_a: Self, point_b: Self) -> i64 {
+        let dx = point_a.x - point_b.x;
+        let dy = point_a.y - point_b.y;
+        dx.abs() + dy.abs()
+    }
 }
 
 impl fmt::Display for Point {
