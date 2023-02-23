@@ -9,6 +9,7 @@ mod day_12;
 mod day_13;
 mod day_14;
 mod day_15;
+mod day_16;
 mod day_2;
 mod day_3;
 mod day_4;
@@ -20,7 +21,7 @@ mod day_9;
 
 use crate::types::Puzzle;
 
-pub const N_DAYS: usize = 15;
+pub const N_DAYS: usize = 16;
 
 pub const DAYS: [Puzzle; N_DAYS] = [
     day_1::run,
@@ -38,4 +39,5 @@ pub const DAYS: [Puzzle; N_DAYS] = [
     day_13::run,
     day_14::run,
     day_15::run,
+    day_16::run,
 ];

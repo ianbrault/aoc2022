@@ -46,6 +46,11 @@ pub fn nchar(s: &str, n: usize) -> char {
     s.chars().nth(n).unwrap()
 }
 
+/// finds the first index of the character in the given string
+pub fn find_char(s: &str, c: char) -> Option<usize> {
+    s.chars().position(|cc| cc == c)
+}
+
 /// iterator adapter to group an iterator into 2-tuples
 pub struct GroupBy2Iterator<I> {
     iter: I,
